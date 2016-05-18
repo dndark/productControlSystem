@@ -23,7 +23,7 @@ module.exports = function(app) {
     });
 
     app.get('/', function(req, res) {
-        return res.send("everyone can see this page")
+        return res.send("hi")
     });
     //return a object if obj.status = 0 username or password not find
     //return 1 if find a match
@@ -63,12 +63,12 @@ module.exports = function(app) {
         // Store hash in your password DB.
         console.log(newUser.permission)
         if (newUser.username || newUser.sponsor || newUser.m_id || newUser.password || newUser.permission) {
-            res.status(400).send("not complete infor");
+            return res.status(400).send("not complete infor");
         }
         newUser.save(function(err) {
             if (err) throw err;
         });
-        res.sendStatus(200);
+        return res.sendStatus(200);
     });
 
     //test only, delete everything in the database
@@ -78,7 +78,7 @@ module.exports = function(app) {
                 console.log(err);
                 return res.sendStatus(500);
             }
-            res.send("Success Delete");
+            return res.send("Success Delete");
         });
     });
 

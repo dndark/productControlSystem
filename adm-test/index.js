@@ -20,7 +20,6 @@ app.use(session({secret: 'tg45ert3w65qwyhxfW21',
 mongoose.connect(config.getDbconnectionString());
 setupController(app);
 apiController(app);
-app.use(session);
 app.listen(port,function(){
     console.log("start at port"+port);
 });
