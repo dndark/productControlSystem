@@ -1,0 +1,37 @@
+a:link{text-decoration:none;color:#009999}
+a:active{text-decoration:none;color:black}
+a:hover{text-decoration:underline;color:red}
+a:visited{text-decoration:none;color:#16387c}
+body{
+  font-size: 14px;
+  color: #16387c;
+}
+/* 首页标题 */
+h1{
+  text-align: center;
+}
+hr{
+  width:98%;
+}
+/* 首页目录表格样式 */
+#pg-index-tb {
+ width:98% ;border:0 align:center; bgcolor:#F5F9FC;
+ border-collapse: collapse;
+}
+#pg-index-tb td{
+  text-decoration:none; color:#009999;
+  text-align: center;
+  font-size:18px; font-weight:bold;
+  padding: 10px;
+}
+
+.pg-em{
+  height: 50px;
+}
+
+#cover {
+    text-align:center;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    font-size:24px;
+}
