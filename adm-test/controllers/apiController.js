@@ -3,8 +3,9 @@ var bcrypt = require('bcrypt-nodejs');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var session = require('express-session')
+var helpfunction = require('./helpFunction')
 module.exports = function(app) {
-
+    var validRegister = helpfunction.validRegister
     app.use(bodyParser.json())
     app.use(bodyParser.urlencoded({extended: true}));
 
@@ -17,12 +18,13 @@ module.exports = function(app) {
 
     //only admin can see this page
     app.get('/public', function(req, res) {
-        if (req.session.user === 'admin' || req.session.user === 'public')
+        if (req.session.user === 'admin' || 'public')
             return res.send("You are login as admin or public "+ req.session.username);
         res.status(404).send('Sorry, You need login!');
     });
 
     app.get('/', function(req, res) {
+        helpfunction.greet("111")
         return res.send("hi")
     });
     //return a object if obj.status = 0 username or password not find
@@ -61,14 +63,13 @@ module.exports = function(app) {
         newUser.password = req.body.password;
         newUser.permission = req.body.permission;
         // Store hash in your password DB.
-        console.log(newUser.permission)
-        if (newUser.username || newUser.sponsor || newUser.m_id || newUser.password || newUser.permission) {
-            return res.status(400).send("not complete infor");
-        }
-        newUser.save(function(err) {
-            if (err) throw err;
-        });
-        return res.sendStatus(200);
+        helpfunction.validRegister(newUser,function(info){
+          if (info.status !== 200){
+            return res.status(info.status).send(info.errlog);
+          }
+          return res.sendStatus(info.status);
+        })
+        // return res.status(400).send(helpfunction.validRegister(newUser).errlog);
     });
 
     //test only, delete everything in the database
